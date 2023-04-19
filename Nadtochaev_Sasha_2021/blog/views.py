@@ -6,7 +6,7 @@ from .models import Category, Post, Coment
 def blog_index(request):
     posts = Post.objects.all()
     context = {
-        'post': posts
+        'posts': posts
     }
     return render(request, 'blog_index.html', context)
 
