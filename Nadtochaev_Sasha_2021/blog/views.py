@@ -30,7 +30,6 @@ def blog_detail(request, pk):
         "comments":comments,
         "form":form
     }
-
     return render(request, "blog_detail.html", context)
 
 
