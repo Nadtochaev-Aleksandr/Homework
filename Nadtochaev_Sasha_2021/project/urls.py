@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views # Из попки project импортируется папка views
 
-urlpatterns = [
-    path("",views.project_index, name="project_index"),
-    path("<int:pk>/",views.project_detail, name="project_detail"),
+urlpatterns = [ # функция urlpatterns содержит в себе список функций psth - это список адресов к определенным функциям представления
+    path("", views.project_index, name="project_index"), # функция path с пустым первым аргументом - то если данная функция будет отрабатываться при пустом запросе "Главная фукнция". Вторым аргументом передана функция представления для данного пути views.project_index т.е. именно она будет отрабатываться при пустом запросе. Третим аргументом задано имя для данного пути - name="project_index". По данному имени можно будет ссылаться на данный url адрес
+    path("<int:pk>/",views.project_detail, name="project_detail"), # вторая функция задана при помощи динамического параметра - целочисленного числа.Будет соответсвовать пути "https:1/ или 2, 3 .... любое целое число". Функция представления views.project_detail. В данной функции будет отловлен пераметр переданный в первом аргументе и в зависимости от него выведен 1, 2, или n вариант функции views.project_detail. Имя пути - name="project_detail"
 ]

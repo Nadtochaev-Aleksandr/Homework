@@ -1,23 +1,27 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!--  -->
+<!-- Это базовый шабон, который будет взят за основу для всех остальных страниц. В нём будут заданы все общие поля, стили, которые будут присуще всем остальным страницам. Всё что будет отличаться от страницы к странице + их содержимое будет передано в определенных местах джанных страниц при помощи тега block page_content  -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  <!-- html тег link, который устанавливает связь с внешним документом. в даннмо случае он связывает файл с внешним файлом bootstrap в котором прописаны стили оформления -->
+<!-- тегу link заданы аргументы rel которы определяет отношения между текущим документом и файлом, на который делается ссылка, в данном случае аргументу задано значение stylesheet, означающее, что подключаемый файл хранит таблицу стилей (CSS). -->
+<!-- второй аргумент тега link - href - определяет путь к связанному файлу. Задан как url адрес к нужному файлу. Третий аргумент integrity Содержит встроенные метаданные — криптографический хеш-код ресурса(файла) в кодировке base64, который вы сообщаете браузеру для загрузки.  -->
+<!-- четвертый аргумент тега link: crossorigin - это перечисляемый атрибут указывает, должен ли CORS использоваться при загрузки ресурса -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- Создаёт навигаю на сайте. По сути это тоже самое что и тег div - создающий отдельный раздел для какого-то блока кода. Но так как навигационная панель кака правило одна для неё создали отдельный тег nav. Тегу nav задан класс class="navbar navbar-expand-lg navbar-light bg-light", по которому он будет идентифицироваться и к которому применяются стили оформелния и прочее-->
+  <div class="container"> <!-- тег div создающий отдельный раздел, которому присвоен класс class="container" -->
+    <a class="navbar-brand" href="{% url 'project_index' %}">Портфолио</a> <!-- при помощи тега а создана ссылка с текстом "Портфолио". Тегу а присвоен аргумент href, задающий путь на который необходимо перейти. данный путь определен при помощи тега url (href="{% url 'project_index' %}"), в котором в свою очереде задан аргумент 'project_index' - это имя url адреса, на которой необходимо перейти. Следовательно при нажатии на текст "Портфолио" будет пренаправлен на url - 'project_index'. Так же ссылке задан класс class="navbar-brand"-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"> <!-- тег button - создаёт на html странице кнопки. Тегу присвоен класс class="navbar-toggler", далее определены аргументы: type - определяюзщий тип кнопки. Он задан к "button", а значит это обычная кнопка. Далее data-toggle - всплывающая подсказка, с data-target - я не разобрался. Какойто априбут Js-->
+    <span class="navbar-toggler-icon"></span> <!-- тег span - предназначен чтобы передаавть строчные буквы текста, но ему ничего не передано по этому я не понимаю зачем он тут нужен -->
+    </button> <!-- закрытие тега button -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="{% url 'project_index' %}">Портфолио</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'project_index' %}">Главная</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'blog_index' %}">Блог</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-{% block page_content %}
-{% endblock %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"> <!-- открытие нового класса, которому присвоен class и id -->
+      <ul class="navbar-nav mr-auto">  <!-- html тег ul - создаёт маркировоный список, ему присвоен класс -->
+        <li class="nav-item active"> <!-- html тег li - определяет отдельный элемент списка. Предыдущий тег ul (или может быть ol) определяет будет ли список нумерованным или маркированным но не задаёт сам элемент, а уже тег li создаёт элемент списка. Ему задан класс -->
+          <a class="nav-link" href="{% url 'project_index' %}">Главная</a> <!-- html тег а создаёт ссылку. Ссылке определен текст "Главная". Тегу заданг класс и атрибут href - отвечающий за передачу адреса по которому нужно перейти при отработке ссылки. В данном случае адрес передан с помощью тега url которому в свою очередь передано имя url адреса из файла url.py как 'project_index'. То есть при нажатии на "Главная" будет осуществлен переход на url адрес и именем 'project_index' из файла url.py. В нашем случае это стартовая страница. -->
+        </li> <!-- Закрытие тега li. На этом закончился первый элемент списка. -->
+        <li class="nav-item active"> <!-- второй элемент списка. Всё по аналогии с предыдущем -->
+          <a class="nav-link" href="{% url 'blog_index' %}">Блог</a> <!-- Всё аналогично предыдущему только передан url.name т.е. при нажатии на "Блог" будет осуществлен переход на blog/ -->
+        </li> <!-- закрытие второго элемента списка -->
+      </ul> <!-- закрытие маркированного списка -->
+    </div> <!-- закрытие раздела с классом class="collapse navbar-collapse" -->
+  </div> <!-- закрытие раздела с классом class="container" -->
+</nav> <!-- закрытие навигационного раздела -->
+{% block page_content %} <!-- тег blog - это тег указывающий что в этом месте в данный шаблон base.html может быть вставлен какой-либо иной блок кода. В данном случае этот блок назвали page_content. Таких блоков в шаблоне может быть сколько угодно много-->
+{% endblock %} <!-- закрытие тега blog. Можно было бы написать (а точнее нужно было бы) endblock page_content так точно понятно какой блок закрывается. Если таких блоков много - можно запутаться. Но так как в данном шаблоне только 1 то можно пренебречь. После этого тега дальше продолжается базовый шаблон. Но в нашем случае не продолжается.-->

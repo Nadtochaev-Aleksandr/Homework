@@ -1,18 +1,18 @@
 from django.shortcuts import render
-from .models import Project
+from .models import Project # Из папки project.models импортируется модель Project
 
 
-def project_index(request):
-    projects = Project.objects.all()
-    context = {
-        'projects': projects
+def project_index(request): #Функция представления project_index, которой передан обязательный параметр request
+    projects = Project.objects.all() # переменная projects которой присваиваются все объекты модели Project (объект queryset)
+    context = { # создается словарь context, который в последствии будет передан аргументом в функцию render
+        'projects': projects # Данному словарю задается элемент ключ-'projects' которому соответсвует значение projects, а именно переменная заданная строкой ранее. При отработке функции render в шаблоне предстваления на место ключа "projects" будет подставлено значение из переменной projects
     }
-    return render(request, 'project_index.html', context)
+    return render(request, 'project_index.html', context) # возврат функции render - шаблонизатор django. При возврате функции render будет отображен шаблон 'project_index.html' т.к. его имя (путь к нему) задано вторым аргументов в функции (обязательный аргумент). При отработке данного шаблона на метов где в шаблоне будудт указаны ключи из словаря context (третий аргумент функции) будут подставлены значения из данного словаря. Первый аргумент request - обязательный аргумент, задаётся всегда и несет в себе информацию о запросе.
 
 
-def project_detail(request, pk):
-    project = Project.objects.get(pk=pk)
-    context = {
-        'project': project
+def project_detail(request, pk): # функция прелставления project_detail, которой передан обязательный аргумент request (информация о запросе) и pk - параметр, который придёт из url адреса. Отлавливаем его здесь, чтобы потом поставить в функцию и в зависимости от него отобразить ту или иную страницу
+    project = Project.objects.get(pk=pk) # определена переменная project. В отличии от функции представления project_index в данной функции работаем не со всеми проектами, а с одним, id которого поступит из url. По этому переменоой project задаётся значение соответсвующее данным для объекта модели Project в котором id равно параметру pk
+    context = { # создается словарь context, который в последствии будет передан аргументом в функцию render
+        'project': project # Данному словарю задается элемент ключ-'project' которому соответсвует значение project, а именно переменная заданная строкой ранее. При отработке функции render в шаблоне предстваления на место ключа "project" будет подставлено значение из переменной project
     }
-    return render(request, 'project_detail.html', context)
+    return render(request, 'project_detail.html', context) # возврат функции render - шаблонизатор django. При возврате функции render будет отображен шаблон 'project_detail.html' т.к. его имя (путь к нему) задано вторым аргументов в функции (обязательный аргумент). При отработке данного шаблона на метов где в шаблоне будудт указаны ключи из словаря context (третий аргумент функции) будут подставлены значения из данного словаря. Первый аргумент request - обязательный аргумент, задаётся всегда и несет в себе информацию о запросе.

@@ -1,17 +1,18 @@
 from django import forms
 
 
-class CommentForm(forms.Form):
-    author = forms.CharField(
-        max_length = 60,
-        widget = forms.TextInput(attrs={
-            'class':'form-control',
-            'placeholder': 'Ваше имя'
+class CommentForm(forms.Form): # создаём класс CommentForm для формы добавления комментариев
+    # в форме имется 2 активных поля автор и тело комментария
+    author = forms.CharField( # автор комментария предстаялется формой класса Charfield - однострочное текстовое поле, заданы 2 необязательных аргумента
+        max_length = 60, # имеет ограничение по максимальному количеству символов - 60 символов
+        widget = forms.TextInput(attrs={ #имеет виджет Textinput соответсвующий однострочному текстовому полю. Виджету задан аргумент attrs, который устанавливает требования к визуальному отображению поля
+            'class':'form-control', # в данном случае задан класс для отображения формы из бутстрапа
+            'placeholder': 'Ваше имя' #  и подсказака в виде фразы "Ваше имя"
         })
     )
-    body = forms.CharField(
-        widget=forms.Textarea(attrs={
-            'class': 'form-control',
-            'placeholder': 'Ваш комментарий'
+    body = forms.CharField( # тело комментария представлено классом CharField, соответсвующий однострочному текстовому полю но имеет виджет
+        widget=forms.Textarea(attrs={ # имеет виджет класса Textarea, который переопределяет тип поля на многострочное текстовое
+            'class': 'form-control', # также виджету задан акргумент attrs, отвечающий за визуализацию поля, задан класс
+            'placeholder': 'Ваш комментарий' # из бутстрапа и подсказка в виде строки "Ваш комментарий"
         })
     )

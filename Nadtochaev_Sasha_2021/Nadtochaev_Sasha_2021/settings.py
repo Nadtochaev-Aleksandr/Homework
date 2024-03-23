@@ -13,35 +13,35 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent # переменная, содержащая абсолютный путь до корня проекта
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mcdkah&zr+_0t$z4@)rzc3^xl(ct#qh&p=r06%9+1po6952plf'
+SECRET_KEY = 'django-insecure-mcdkah&zr+_0t$z4@)rzc3^xl(ct#qh&p=r06%9+1po6952plf'# Секретный ключ, используемый для криптографической подписи
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # Переменная, определяющая в каком состоянии находится сайт. В режиме разработки = True - при ошибках на экран выводится подробная информация об ошибках. В режиме работы на реальном сервере = False. При ошибках пользователю выводится заранее подготовленная страница.
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []# Переменная - допустимые хосты. Это переменная содержит в себе список хостингов (доменов) для которых может работать сайт. Это нужно для безопасности чтобы не было подмены хоста мошенниками.
 
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
+INSTALLED_APPS = [ # Переменная содержит в себе список всех прилажений, задействованных при работе сайта. В неё же нужно добавлять вновь созданные приложения
+    'django.contrib.admin', #Первые 6 строчек это стандартные приложения django
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'project.apps.ProjectConfig',
-    'blog.apps.BlogConfig',
+    'project.apps.ProjectConfig', # Созданное нами приложение project. Сюда для регистрации добавлена строка содержащая в себе путь к классу, отвечающему за работу приложения. Это класс ProjectConfig, располагающийся в файле apps.py приложения project
+    'blog.apps.BlogConfig', # Созданное нами приложение blog. Сюда для регистрации добавлена строка содержащая в себе путь к классу, отвечающему за работу приложения. Это класс BlogConfig, располагающийся в файле apps.py приложения blog
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [ #Переменная MIDDLEWARE содержаит в себе список промежуточных слоёв - наборов хуков для обработки запросов и ответов. А точнее список строк, которые представляют полный путь для импорта класса промежуточного слоя
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,14 +51,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Nadtochaev_Sasha_2021.urls'
+ROOT_URLCONF = 'Nadtochaev_Sasha_2021.urls' #Переменная содержащая строку представляющую полный путь импорта python к корневому URLconf
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['Nadtochaev_Sasha_2021/templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
+TEMPLATES = [ #Переменная содержащая список настроек для шаблонизаторов. По умолчанию django работет с шаблонизаторами DjangoTemplates и Jinja. Чтобы настроить другой дополнительный шаблонизатор необходимо добавить в список вторым элементов словарь с настройками этого шаблонизатора
+    { # переменная представлена списком, который содержаит в себе словарь. Элементы словаря и есть настройки шаблонизатора. Это первый элемент словаря с настройками стандартного шаблониазтора Django
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', # ключ BACKEND - это бэкенд шаблонизатора. Значения ключа содержат строку к классу, ответсвенну за работу данного шаблонизатора
+        'DIRS': ['Nadtochaev_Sasha_2021/templates'], # Ключ 'DIRS' - отвечает за пути по которым шаблонизатор будет искать файлы шаблонов. Значения ключа содержат список путей к папкам с шаблонами. По умолчанию пуст т.к. по умолчанию шаблонизатор django ищет шаблоны в папке templates в приложениях, я задал 'Nadtochaev_Sasha_2021/templates' т.к. это не стандартный путь и тут я разместил шаблон base.html
+        'APP_DIRS': True, # ключ'APP_DIRS' отвечает за то будет ли django искать файлы шаблонов в папках templates прилодений. По умолчанию значение= True, значит будет.
+        'OPTIONS': { # ключ 'OPTIONS' содержит дополнительные параметры
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -69,16 +69,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Nadtochaev_Sasha_2021.wsgi.application'
+WSGI_APPLICATION = 'Nadtochaev_Sasha_2021.wsgi.application' # Переменная WSGI_APPLICATION содержит в себе строку с полным путем к объекту WSGI прилодения, которое использует встроенный сервер django
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DATABASES = { # Переменная DATABASES содержит настройки баз данных. Django может работать с множеством баз данных но по умолчанию это sqlite. Переменаая DATABASES представляет собой словарь в котором ключ словаря это имя базы данных (хотя бы одна должна называться default), а значение данного ключа представляет собой новый словарь с настройками данной базы данныз
+    'default': { # Первый элемент словаря. Так как он у нас один и хотя бы один элемент должен называться default то он так и назван. Вообще может быть сколько угодно элементов.
+        'ENGINE': 'django.db.backends.sqlite3', # Первый элемент словаря default - 'ENGINE' это движок, представляет собой движок на котром работает база данных. Значение этого элемента - 'django.db.backends.sqlite3' это ссылка на класс отвечающий за работу базы данных. В нашем случае sqlite3
+        'NAME': BASE_DIR / 'db.sqlite3', # Второй элемент словаря default - 'NAME'- указывает путь к файлу с базой данных. Значение данного элемента - BASE_DIR / 'db.sqlite3' т.е. файл баз данных db.sqlite3 будет распологаться в корне проекта (BASE_DIR).
     }
 }
 
@@ -86,18 +86,18 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
+AUTH_PASSWORD_VALIDATORS = [ # данная переменная содержит в себе список валидаторов, которые проверяют надежность паролей
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', # проверяет сходство пароля с набором атрибутов пользователя
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', # Проверяет минимальное число символов
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', # Проверяет сходство пароля с набором самых простых и распространенных паролей
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # Проверяет состоит ли пароль только из одних цифр
     },
 ]
 
@@ -105,21 +105,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ru' # данная переменная содержит строку - код языка, используемого в проете
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC' # Данная переменная содержит в себе строку, указывающую в каком часовом поясе сохранены даты и время в базе данных
 
-USE_I18N = True
+USE_I18N = True # Данная переменная отвечает за то включён ли механизм перевода в проекте или нет
 
-USE_TZ = True
+USE_TZ = True # Данная переменная отвечает за то использовать ли часовой пояс, указанный в переменной TIME_ZONE  или нет
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' # переменная STATIC_URL это переменная хранящая в себе строку, отражающую URL указывающий на каталог со статическими файлами. !ВАЖНО! Должна заказчиваться слэшем "/"!!! Т.к. по умолчанию она задана как 'static/' то django автоматически будет искать статические файлы в папках static, рпсположенных в приложениях
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # Переменная, содержащая строку, указывающаю тип поля первичного ключа по умолчанию для людей у которых нет поля с расширением primery_key=True

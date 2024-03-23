@@ -1,9 +1,10 @@
+# В этом файле прописаны пути для маршрутизации по приложению blog
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views  # из папки приложения blog импортируется вся папка views
 
-urlpatterns = [
-    path("",views.blog_index, name="blog_index"),
-    path("<int:pk>/", views.blog_detail, name="blog_detail"),
-    path("<category>/", views.blog_category, name="blog_category"),
+urlpatterns = [ # переменная urlpatterns содержит в себе список функций path которые и являются маршрутами
+    path("",views.blog_index, name="blog_index"), # путь 1, функция path, которой переданы 3 аргумента. 1 обязательный - имя маршрута по которому будет осуществлен переход в случае срабатывания данного маршрута. В данном случае пустая строка, а значит это главная функция приложения blog. При переходе на blog/ будет автоматически переадресовано на этот путь. Второй аргумент (обязательный) views.blog_index - функция представления, которая отрабатывает при срабатывании данного маршрута. В данном случае это функция blog_index из файла views приложения blog (т.к. в начале файла импортирован файл views из приложения blog (from . import views) (точка олзначает что из текущей папки). Третий аргумент (НЕ обязательный!) name - присвоение имени функции (маршрута), на которое можно будет ссылаться для вызова при работе в шаблонизаторе. В данном случае это blog_index (name="blog_index")
+    path("<int:pk>/", views.blog_detail, name="blog_detail"), # Путь 2 (blog/1,2,3,...n), функция path, которой первым параметром передан спецификатор pk челочисленного типа, который отлавливается в функции представления views.blog_detail, соответсвенно в зависимости от параметра будут отображены разные страницы. Имя данного маршрута - blog_detail
+    path("<category>/", views.blog_category, name="blog_category"), # Путь 3 (blog/category), функция path, которой передан первым параметром спецификатор типа строка str (<category> - str (string) спецификатор по умолчанию, по этому его можно не указывать в отличии от путь 2 где спецификатор был целочисленным числом <int:pk> (<category>=<str:category>). Функция представления - views.blog_category. Имя - blog_category (name="blog_category")
 ]
